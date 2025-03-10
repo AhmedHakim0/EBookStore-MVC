@@ -1,3 +1,7 @@
+using EBookStore.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace EBookStore
 {
     public class Program
@@ -8,6 +12,8 @@ namespace EBookStore
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>(Options =>
+                Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 

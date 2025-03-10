@@ -1,0 +1,46 @@
+﻿@model List<Category>
+	
+<div class="Cotainer">
+	<div class="row pt-4 pb-3"> 
+		<div class="col-6">
+			<h1 class="text-primary">
+				Category List
+				</h1>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controller="Category" asp-action="Create" class="btn btn-outline-primary"> 
+				<i class="bi bi-plus-circle"></i> Create New Category
+			</a>
+	</div>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>
+				Category Name
+			</th>
+			<th>
+				Display Order
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model)
+		{
+			<tr>
+				<td>@obj.Name</td>
+				<td>@obj.DisplayOrder</td>
+				<td>
+						<a asp-controller="Category" asp-action="Edite" asp-route-id="@obj.Id" class="btn btn-success">
+							<i class="bi bi-pencil-square"></i> Edite Category
+						</a>
+							<a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger">
+								<i class="bi bi-trash"></i> Delete Category
+							</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+
+</table>
+</div>
