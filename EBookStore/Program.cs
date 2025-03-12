@@ -1,4 +1,4 @@
-using EBookStore.Data;
+using EBookStore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 

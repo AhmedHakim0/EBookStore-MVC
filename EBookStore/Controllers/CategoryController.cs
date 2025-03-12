@@ -1,5 +1,4 @@
-﻿using EBookStore.Data;
-using EBookStore.Models;
+﻿
 using Microsoft.AspNetCore.Mvc;
 
 namespace EBookStore.Controllers

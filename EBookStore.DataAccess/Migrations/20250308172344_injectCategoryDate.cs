@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace EBookStore.Migrations
+namespace EBookStore
 {
     /// <inheritdoc />
     public partial class injectCategoryDate : Migration

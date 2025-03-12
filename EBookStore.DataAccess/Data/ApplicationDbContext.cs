@@ -1,7 +1,7 @@
 ﻿using EBookStore.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EBookStore.Data
+namespace EBookStore
 {
     public class ApplicationDbContext:DbContext
     {
