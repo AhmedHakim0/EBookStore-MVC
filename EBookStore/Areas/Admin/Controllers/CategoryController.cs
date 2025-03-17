@@ -1,19 +1,19 @@
-﻿
+﻿using EBookStore.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EBookStore.Controllers
+namespace EBookStore.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly IUnitOfWork unitOfWork;
 
-        public CategoryController(ApplicationDbContext _db)
+        public CategoryController(IUnitOfWork _unitOfWork)
         {
-            db = _db;
+            unitOfWork = _unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> CategoryList = db.Categories.ToList();
+           List<Category> CategoryList = unitOfWork.categoryRepository.GetAll().ToList();
             return View(CategoryList);
         }
         public IActionResult Create()
@@ -30,8 +30,8 @@ namespace EBookStore.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+               unitOfWork.categoryRepository.Add(category);
+                unitOfWork.Save();
                 TempData["Success"] = "Category Created Succesfully";
                 return RedirectToAction("Index");
             }
@@ -44,7 +44,7 @@ namespace EBookStore.Controllers
                 return NotFound();
             }
 
-            Category? category = db.Categories.Find(id);
+            Category? category = unitOfWork.categoryRepository.Get(c => c.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -62,8 +62,8 @@ namespace EBookStore.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Categories.Update(category);
-                db.SaveChanges();
+                unitOfWork.categoryRepository.Update(category);
+                unitOfWork.Save();
                 TempData["Success"] = "Category Updated Succesfully";
                 return RedirectToAction("Index");
             }
@@ -75,7 +75,7 @@ namespace EBookStore.Controllers
             {
                 return NotFound();
             }
-            Category? category = db.Categories.Find(id);
+            Category? category = unitOfWork.categoryRepository.Get(c=>c.Id==id);
             if (category == null)
             {
                 return NotFound();
@@ -91,11 +91,11 @@ namespace EBookStore.Controllers
             {
                 return NotFound();
             }
-            Category? category = db.Categories.Find(id);
+            Category? category = unitOfWork.categoryRepository.Get(c => c.Id == id);
 
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            TempData["Success"] = "Category Deleted Succesfully";
+            unitOfWork.categoryRepository.Remove(category);
+            unitOfWork.Save();
+             TempData["Success"] = "Category Deleted Succesfully";
             return RedirectToAction("Index");
 
         }
