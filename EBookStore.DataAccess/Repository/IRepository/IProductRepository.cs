@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EBookStore.Models.Models;
 
 namespace EBookStore.DataAccess.Repository.IRepository
 {
-   public interface IUnitOfWork
+    public interface IProductRepository:IRepository<Product>
     {
-        public ICategoryRepository categoryRepository { get; }
-        public IProductRepository ProductRepository { get; }
-        void Save();
+        void Update(Product product);
+     
     }
 }

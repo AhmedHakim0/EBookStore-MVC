@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EBookStore.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -95,7 +96,7 @@ namespace EBookStore.Areas.Admin.Controllers
 
             unitOfWork.categoryRepository.Remove(category);
             unitOfWork.Save();
-             TempData["Success"] = "Category Deleted Succesfully";
+            TempData["Success"] = "Category Deleted Succesfully";
             return RedirectToAction("Index");
 
         }

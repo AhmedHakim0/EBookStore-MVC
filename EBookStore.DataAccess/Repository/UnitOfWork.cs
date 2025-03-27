@@ -12,10 +12,13 @@ namespace EBookStore.DataAccess.Repository
     {
         private readonly ApplicationDbContext db;
         public ICategoryRepository categoryRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             this.db = db;
             categoryRepository = new CategoryRepository(db);
+            ProductRepository = new ProductRepository(db);
         }
         public void Save()
         {

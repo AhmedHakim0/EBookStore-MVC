@@ -15,7 +15,8 @@ namespace EBookStore
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(Options =>
-                Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                                b => b.MigrationsAssembly("EBookStore.DataAccess")));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             var app = builder.Build();
 
@@ -35,7 +36,7 @@ namespace EBookStore
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}")
+                pattern: "{area=Admin}/{controller=Poduct}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
